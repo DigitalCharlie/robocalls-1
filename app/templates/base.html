@@ -10,20 +10,23 @@
     <meta property="og:title" content="Make them listen. Make them impeach."/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.makethemlisten.us"/>
-    <meta property="og:image" content="images/Facebook Image.png"/>
+    <meta property="og:image" content="{{ url_for('static', filename='images/Facebook Image.png') }}"/>
     <meta property="og:site_name" content="Make Them Listen"/>
     <meta property="fb:admins" content="612663871"/>
-    <meta property="og:description" content="Play tapes of Trump’s high crimes for your members of Congress to demand they remove the Trump Administration."/>
+    <meta property="og:description"
+          content="Play tapes of Trump’s high crimes for your members of Congress to demand they remove the Trump Administration."/>
     <meta property="twitter:title" content="Frustrated with Congress refusing to remove Trump? Maybe this will help."/>
     <meta property="twitter:description" content=" Play tapes of Trump’s high crimes for your Member of Congress."/>
-    <meta name="twittertext" content="If you’re frustrated with Congress refusing to remove Trump - maybe this will help. Play tapes of Trump’s high crimes for your Member of Congress."/>
+    <meta name="twittertext"
+          content="Send a recording of Donald Trump defending Nazis after they murdered a peaceful protester to your members of Congress to demand they remove him from office: MakeThemListen.us"/>
 
     <title>#MakeThemListen</title>
     <link href="{{ url_for('static', filename='css/baseline.css') }}" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename="js/core.js") }}" rel="stylesheet"></script>
-    <script src="js/jquery.fittext.js"></script>
+    <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="{{ url_for('static', filename='js/jquery.fittext.js') }}"></script>
 
 </head>
 <body>
@@ -31,12 +34,10 @@
 <div class="top">
 
     <div class="content topContent">
-
         <h1 id="mainTitle">#MakeThemListen</h1>
 
-        <p>Donald Trump confessed on tape to committing sexual assault. Follow these two easy steps to make your Members
-            of Congress listen to the recording.</p>
-
+        <p>Play a recording of Trump’s most impeachable moments for your Members of Congress to demand his
+            administration be removed from office. </p>
     </div>
 </div>
 
@@ -56,25 +57,22 @@
                 your name and the fact that you are a constituent.</p>
 
             <p class="faqQuestion">What am I asking Congress to do?</p>
-            <p class="faqAnswer">Remove Donald Trump from office because of his confession of sexual assault and cover
-                ups for other abusers in his White House. He is not above the law, and should be treated in the same way
-                as other powerful men in Congress and elsewhere when their history of abuse was revealed.</p>
+            <p class="faqAnswer">Remove Donald Trump from office through impeachment. He is separating families and
+                abusing children, discriminating against our people for their religion, encouraging white supremacists,
+                obstructing justice and working with a foreign dictator to undermine our democracy. Impeachment will
+                protect us from this president and make it possible to build a country that finally works for all of
+                us.</p>
+
+        </div>
+        <div class="faqColumn">
+            <p class="faqQuestion">What does the recording say?</p>
+            <p class="faqAnswer">“Hello [Representative’s Name]. Your constituent [Your name] from zip code [your zip
+                code] thinks the following recording justifies the impeachment of Donald Trump: [recording plays]. Their
+                number is [your number].” That’s all.</p>
 
             <p class="faqQuestion">Why shouldn’t I just call Congress myself?</p>
             <p class="faqAnswer">You can! There is nothing wrong with a regular call, but Trump’s confession of sexual
                 assault speaks for itself, and we thought this was more efficient.</p>
-
-        </div>
-        <div class="faqColumn">
-
-            <p class="faqQuestion">How will they know who's calling?</p>
-            <p class="faqAnswer">By default we include your name, city and zip code at the start of the call. After
-                listening to your message, your rep(s) get the option to replay it or to hear your name and location
-                again.</p>
-
-            <p class="faqQuestion">What if my congressperson doesn't answer the call?</p>
-            <p class="faqAnswer">Our robots will wait an hour and then try a different number. Most reps have a least
-                two (some as many as eight) office phone numbers. Our robots will try to call each.</p>
 
             <p class="faqQuestion">Does it cost anything?</p>
             <p class="faqAnswer">This page is free to use, but every call costs the creators of this site a small
@@ -92,6 +90,6 @@
     <div class="footer">
         <img class="footerLogo" src="{{ url_for('static', filename='images/logo.svg') }}">
     </div>
-
+</div>
 </body>
 </html>

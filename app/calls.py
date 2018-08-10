@@ -1,28 +1,26 @@
-import phonenumbers
 import json
-from flask import flash
+import phonenumbers
 
 from app import app
 from app.client import client
 
 
-def format_phone(phone):
+def format_phone(phone, format=phonenumbers.PhoneNumberFormat.E164):
     return phonenumbers.format_number(
-        phonenumbers.parse(phone, 'US'), phonenumbers.PhoneNumberFormat.E164
+        phonenumbers.parse(phone, 'US'), format
     )
 
 
-def make_calls(given_name, family_name, postal_code, reps):
+def make_calls(person, reps):
     # only make one call if the recipient is overridden
     if app.config.get('PHONE_RECIPIENT_OVERRIDE'):
         reps = reps[:1]
 
     for rep in reps:
-        make_call(given_name, family_name, postal_code, rep)
-        flash(f'Call placed to <strong>{rep["name"]}</strong> at <strong>{rep["phone"]}</strong>.')
+        make_call(person, rep)
 
 
-def make_call(given_name, family_name, postal_code, rep):
+def make_call(person, rep):
     account_sid = app.config.get('TWILIO_ACCOUNT_SID')
     auth_token = app.config.get('TWILIO_SECRET')
 
@@ -41,11 +39,13 @@ def make_call(given_name, family_name, postal_code, rep):
 
     parameters = {
         'contact_name': contact_name,
-        'first_name': given_name,
-        'last_name': family_name,
-        'zip': postal_code
+        'first_name': person.given_name,
+        'last_name': person.family_name,
+        'callback_number': format_phone(person.phone_number, phonenumbers.PhoneNumberFormat.NATIONAL),
+        'zip': ' '.join(c for c in person.postal_code)
     }
 
+    app.logger.info(f"Placing call from {call_from} to {call_to}", parameters)
     response = client().post(
         f'https://studio.twilio.com/v1/Flows/{flow_sid}/Engagements',
         {
@@ -57,3 +57,4 @@ def make_call(given_name, family_name, postal_code, rep):
     )
 
     response.raise_for_status()
+    app.logger.info("Successfully placed call")

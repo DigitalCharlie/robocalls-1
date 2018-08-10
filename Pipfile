@@ -9,8 +9,10 @@ flask-wtf = "*"
 phonenumbers = "*"
 gunicorn = "*"
 requests = "*"
+redis = "*"
+rq = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3"
+python_version = "3.7"
